@@ -1,0 +1,7 @@
+{
+  "name": "kotak_chatbot",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
