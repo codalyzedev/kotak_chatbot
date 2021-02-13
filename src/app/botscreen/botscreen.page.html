@@ -16,6 +16,19 @@
   </ion-header>
 
   <div id="container">
-    <p>chat container</p>
+    <ion-list>
+      <div *ngFor="let conversation of conversations">
+        <div class="bot-item-container">
+          <ion-avatar class="avatar">
+            <img src="../../assets/bella-profile.png">
+          </ion-avatar>
+          <div class="text-box">
+            <span class="sf-pro label">
+              {{conversation.message}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </ion-list>
   </div>
 </ion-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { conversations } from '../../mock';
 
 @Component({
   selector: 'app-botscreen',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./botscreen.page.scss'],
 })
 export class BotscreenPage implements OnInit {
+  conversations: any;
 
-  constructor() { }
+  constructor() { 
+    this.conversations = conversations;
+  }
 
   ngOnInit() {
   }
