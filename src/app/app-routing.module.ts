@@ -3,14 +3,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: 'botscreen',
+    loadChildren: () => import('./botscreen/botscreen.module').then( m => m.BotscreenPageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'botscreen',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({
