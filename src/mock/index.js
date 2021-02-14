@@ -25,7 +25,7 @@ export const conversations = [
         user: 'bot',
         message: `Nice to meet you, Jane! How old are you ?`,
         path: 'src/assets/bella-profile.png',
-        responseType: 'text'
+        responseType: 'number'
     },
     {
         step: 4,
@@ -45,7 +45,7 @@ export const conversations = [
         user: 'bot',
         message: `What do you do?`,
         path: 'src/assets/bella-profile.png',
-        responseType: 'text'
+        responseType: 'dropdown'
     },
     {
         step: 7,
