@@ -16,17 +16,19 @@
   </ion-header>
 
   <div id="container">
-    <ion-list>
+    <ion-list class="list">
       <div *ngFor="let conversation of conversations">
         <div *ngIf="conversation.user === 'bot'" class="bot-item-container">
           <ion-avatar class="avatar">
-            <img src="../../assets/bella-profile.png">
+            <img src="/assets/bella-profile.png" *ngIf="conversation.step === currentStep">
           </ion-avatar>
+          <div class="loading" *ngIf="!!currentStepObj.loading && conversation.step === currentStep">
+            <ng-lottie [options]="loadingAnim" height="32px" width="80px"> </ng-lottie>
+          </div>
           <div class="text-box">
-            <div *ngIf="!!currentStepObj.loading && conversation.step === currentStep">
-              loading
-            </div>
-            <span *ngIf="conversation.step !== currentStep || (!currentStepObj.loading && conversation.step === currentStep)" class="sf-pro label">
+            <span
+              *ngIf="conversation.step !== currentStep || (!currentStepObj.loading && conversation.step === currentStep)"
+              class="sf-pro label">
               {{conversation.message}}
             </span>
           </div>
@@ -50,13 +52,18 @@
       </ion-button>
     </div>
     <div *ngIf="currentStepObj.responseType === 'number'" class="text-input-container">
-      <ion-range (ionChange)="onChangeInput($event)" value={{inputVal}} dualKnobs="false" min="10" max="100" step="1" snaps="false" pin="true" ></ion-range>
+      <ion-range (ionChange)="onChangeInput($event)" value={{inputVal}} dualKnobs="false" min="10" max="100" step="1"
+        snaps="false" pin="true"></ion-range>
       <ion-button (click)="onSubmitBtn($event)">
         <ion-icon slot="icon-only" src="/assets/Send.svg"></ion-icon>
       </ion-button>
     </div>
-    <div *ngIf="currentStepObj.responseType === 'dropdown'" class="text-input-container">
-      numberrrr
+    <div *ngIf="currentStepObj.responseType === 'dropdown'" class="dd-input-container">
+      <div *ngFor="let opt of ddOpts">
+        <div (click)="onSubmitOpt(opt)" class="btn">
+          {{opt}}
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { conversations } from '../../mock';
+import { AnimationOptions } from 'ngx-lottie';
 
 @Component({
   selector: 'app-botscreen',
@@ -11,16 +12,25 @@ export class BotscreenPage implements OnInit {
   currentStep: number;
   currentStepObj: any;
   inputVal: string;
+  options: { path: string; autoplay: boolean; loop: boolean; };
+  ddOpts: any[];
 
   constructor() {
     this.conversations = [];
-    this.currentStep = 1;
+    this.currentStep = 0;
     this.currentStepObj = conversations.find(item => item.step === this.currentStep);
     this.inputVal = '';
+    this.ddOpts = ['Designer', 'Engineer', 'Doctor', 'Marketing', 'Student', 'Entrepreneur', 'Professional', 'Retired'];
   }
 
+  loadingAnim: AnimationOptions = {
+    path: "assets/animations/Typing.json",
+    autoplay: true,
+    loop: true
+  };
+
   ngOnInit() {
-    this.conversations = this.getConversationsToStep(this.currentStep);
+    this.updateBotStep(this.currentStep);
   }
 
   onChangeInput(e) {
@@ -28,7 +38,11 @@ export class BotscreenPage implements OnInit {
   }
 
   onSubmitBtn() {
-    console.log(this.inputVal);
+    this.updateUserStep(1);
+  }
+
+  onSubmitOpt(value) {
+    this.inputVal = value;
     this.updateUserStep(1);
   }
 
@@ -67,7 +81,7 @@ export class BotscreenPage implements OnInit {
     this.currentStepObj = { ...nextStepObjInConversations, loading: true };
     setTimeout(() => {
       this.updateBotQuestion();
-    }, 2000);
+    }, 1000);
   }
 
   updateBotQuestion() {

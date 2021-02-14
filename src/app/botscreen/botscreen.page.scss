@@ -2,6 +2,10 @@
   font-size: 32px;
 }
 
+.list {
+  height: 60%;
+}
+
 .bot-item-container {
   min-height: 48px;
   justify-items: flex-start;
@@ -14,6 +18,11 @@
     width: 50px;
     border-radius: 25px;
     margin-right: 5px;
+  }
+  .loading {
+    min-height: 48px;
+    margin: 10px 5px;
+    justify-items: center;
   }
   .text-box {
     background-color: #f6f6f7;
@@ -38,7 +47,7 @@
   flex-direction: row-reverse;;
   margin: 20px;
   .text-box {
-    background-color: #f6f6f7;
+    background-color: #EDEEF7;
     min-height: 48px;
     margin: 10px 5px;
     border-radius: 24px;
@@ -72,6 +81,22 @@
     .input {
       border-bottom: 2px solid #5b61b9 ;
     }
+  }
+}
+
+.dd-input-container {
+  background-color: #edeef7;
+  min-height: 140px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  .btn {
+    height: 48px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
   }
 }
 
