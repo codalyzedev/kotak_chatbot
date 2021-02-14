@@ -86,7 +86,8 @@
 
 .dd-input-container {
   background-color: #edeef7;
-  min-height: 140px;
+  max-height: 300px;
+  overflow: scroll;
   width: 100%;
   display: flex;
   flex-direction: column;

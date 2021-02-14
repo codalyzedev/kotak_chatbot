@@ -15,7 +15,7 @@
     </ion-toolbar>
   </ion-header>
   <div id="container">
-    <ion-list class="list">
+    <ion-list *ngIf="currentStepObj.responseType !== 'complete'" class="list">
       <div *ngFor="let conversation of conversations">
         <div *ngIf="conversation.user === 'bot'" class="bot-item-container">
           <ion-avatar class="avatar">
