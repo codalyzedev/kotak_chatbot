@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { conversations } from '../../mock';
 import { AnimationOptions } from 'ngx-lottie';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-botscreen',
   templateUrl: './botscreen.page.html',
   styleUrls: ['./botscreen.page.scss'],
 })
+
 export class BotscreenPage implements OnInit {
   conversations: any;
   currentStep: number;
@@ -14,6 +16,7 @@ export class BotscreenPage implements OnInit {
   inputVal: string;
   options: { path: string; autoplay: boolean; loop: boolean; };
   ddOpts: any[];
+  @ViewChild('list') list : IonContent;
 
   constructor() {
     this.conversations = [];
@@ -46,9 +49,18 @@ export class BotscreenPage implements OnInit {
     this.updateStep('user', 1);
   }
 
-  getConversationsToStep(step) {
+  editUserResponse(step) {
+    this.inputVal = '';
+    const copyConvs = this.conversations.splice(0);
+    this.conversations = this.getConversationsToStep(copyConvs, step - 1);
+    this.currentStep = step -1;
+    this.currentStepObj = copyConvs.find(item => item.step === step - 1);
+    this.list.scrollToBottom(300);
+  }
+
+  getConversationsToStep(convs, step) {
     let showConvs = [];
-    conversations.forEach(item => {
+    convs.forEach(item => {
       if (item.step <= step) showConvs.push(item);
     });
     return showConvs;
@@ -74,6 +86,7 @@ export class BotscreenPage implements OnInit {
       }, 1000);
     } else {
       this.updateStep('bot', 1);
+      this.list.scrollToBottom(300);
     }
   }
 
@@ -87,6 +100,7 @@ export class BotscreenPage implements OnInit {
     this.currentStepObj = { ...nextStepObjInConversations, loading: false, responseType: nextStepObjInConversations.component };
     const checkIfNextIsBot = this.getStepObj(nextStep + 1);
     this.inputVal = '';
+    this.list.scrollToBottom(300);
     if (checkIfNextIsBot.user === 'bot') {
       this.updateStep('bot', 1);
     }

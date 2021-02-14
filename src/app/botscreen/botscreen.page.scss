@@ -2,8 +2,16 @@
   font-size: 32px;
 }
 
+#container {
+  height: 100%;
+}
+
+.content {
+  height: 300px;
+  overflow: scroll;
+}
+
 .list {
-  height: 60%;
 }
 
 .bot-item-container {
@@ -59,6 +67,10 @@
       font-size: 14px;
       color: var(--ion-text-color) !important;
     }
+  }
+  .edit-text {
+    color: #5B61B9;
+    font-size: 12px;
   }
 }
 

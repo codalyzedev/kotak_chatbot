@@ -15,32 +15,35 @@
     </ion-toolbar>
   </ion-header>
   <div id="container">
-    <ion-list *ngIf="currentStepObj.responseType !== 'complete'" class="list">
-      <div *ngFor="let conversation of conversations">
-        <div *ngIf="conversation.user === 'bot'" class="bot-item-container">
-          <ion-avatar class="avatar">
-            <img src="/assets/bella-profile.png" *ngIf="conversation.step === currentStep">
-          </ion-avatar>
-          <div class="loading" *ngIf="!!currentStepObj.loading && conversation.step === currentStep">
-            <ng-lottie [options]="loadingAnim" height="32px" width="80px"> </ng-lottie>
+    <ion-content #list class="content">
+      <ion-list class="list" *ngIf="currentStepObj.responseType !== 'complete'">
+        <div *ngFor="let conversation of conversations">
+          <div *ngIf="conversation.user === 'bot'" class="bot-item-container">
+            <ion-avatar class="avatar">
+              <img src="/assets/bella-profile.png" *ngIf="conversation.step === currentStep">
+            </ion-avatar>
+            <div class="loading" *ngIf="!!currentStepObj.loading && conversation.step === currentStep">
+              <ng-lottie [options]="loadingAnim" height="32px" width="80px"> </ng-lottie>
+            </div>
+            <div class="text-box">
+              <span
+                *ngIf="conversation.step !== currentStep || (!currentStepObj.loading && conversation.step === currentStep)"
+                class="sf-pro label">
+                {{conversation.message}}
+              </span>
+            </div>
           </div>
-          <div class="text-box">
-            <span
-              *ngIf="conversation.step !== currentStep || (!currentStepObj.loading && conversation.step === currentStep)"
-              class="sf-pro label">
-              {{conversation.message}}
-            </span>
+          <div *ngIf="conversation.user === 'user'" class="user-item-container">
+            <div class="text-box">
+              <span class="sf-pro label">
+                {{conversation.message}}
+              </span>
+            </div>
+            <span (click)="editUserResponse(conversation.step)" class="sf-pro bold edit-text">edit</span>
           </div>
         </div>
-        <div *ngIf="conversation.user === 'user'" class="user-item-container">
-          <div class="text-box">
-            <span class="sf-pro label">
-              {{conversation.message}}
-            </span>
-          </div>
-        </div>
-      </div>
-    </ion-list>
+      </ion-list>
+    </ion-content>
     <div *ngIf="currentStepObj.responseType === 'text'" class="text-input-container">
       <div class="input-box">
         <ion-label position="stacked" class="sf-pro bold label">Name</ion-label>
