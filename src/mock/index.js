@@ -4,6 +4,7 @@ export const conversations = [
         user: 'bot',
         message: `Hey ! I'm Bella the bot. \n Let's get to know each other! :)`,
         path: '/assets/bella-profile.png',
+        component: 'none',
         responseType: 'none'
 
     },
@@ -12,6 +13,7 @@ export const conversations = [
         user: 'bot',
         message: `What's your name ?`,
         path: '/assets/bella-profile.png',
+        component: 'text',
         responseType: 'text'
     },
     {
@@ -25,6 +27,7 @@ export const conversations = [
         user: 'bot',
         message: `Nice to meet you, Jane! How old are you ?`,
         path: '/assets/bella-profile.png',
+        component: 'number',
         responseType: 'number'
     },
     {
@@ -38,6 +41,7 @@ export const conversations = [
         user: 'bot',
         message: `I talk to people for a living.`,
         path: '/assets/bella-profile.png',
+        component: 'none',
         responseType: 'none'
     },
     {
@@ -45,6 +49,7 @@ export const conversations = [
         user: 'bot',
         message: `What do you do?`,
         path: '/assets/bella-profile.png',
+        component: 'dropdown',
         responseType: 'dropdown'
     },
     {
@@ -58,6 +63,7 @@ export const conversations = [
         user: 'bot',
         message: `Thanks! That's all i need`,
         path: '/assets/bella-profile.png',
+        component: 'complete',
         responseType: 'complete'
-    },
+    }
 ];

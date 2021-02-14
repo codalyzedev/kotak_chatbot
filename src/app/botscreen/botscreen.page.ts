@@ -30,7 +30,7 @@ export class BotscreenPage implements OnInit {
   };
 
   ngOnInit() {
-    this.updateBotStep(this.currentStep);
+    this.updateStep('bot', this.currentStep);
   }
 
   onChangeInput(e) {
@@ -38,12 +38,12 @@ export class BotscreenPage implements OnInit {
   }
 
   onSubmitBtn() {
-    this.updateUserStep(1);
+    this.updateStep('user', 1);
   }
 
   onSubmitOpt(value) {
     this.inputVal = value;
-    this.updateUserStep(1);
+    this.updateStep('user', 1);
   }
 
   getConversationsToStep(step) {
@@ -58,44 +58,37 @@ export class BotscreenPage implements OnInit {
     return conversations.find(item => item.step === step);
   }
 
-  updateUserStep(nStep) {
+  updateStep(type, nStep) {
     const nextStep = this.currentStep + nStep;
     const nextStepObjInConversations = this.getStepObj(nextStep);
     const updatedConversations = this.conversations.splice(0);
     updatedConversations.push(nextStepObjInConversations);
-    updatedConversations.splice(nextStep, 1, { ...nextStepObjInConversations, message: this.inputVal });
+    const updateObj = type === 'bot' ? { loading: true, responseType: null } : { message: this.inputVal };
+    updatedConversations.splice(nextStep, 1, Object.assign(nextStepObjInConversations, updateObj));
     this.conversations = updatedConversations;
     this.currentStep = nextStep;
-    this.currentStepObj = { ...nextStepObjInConversations, message: this.inputVal };
-    this.updateBotStep(1);
-  }
-
-  updateBotStep(nStep) {
-    const nextStep = this.currentStep + nStep;
-    const nextStepObjInConversations = this.getStepObj(nextStep);
-    const updatedConversations = this.conversations.splice(0);
-    updatedConversations.push(nextStepObjInConversations);
-    updatedConversations.splice(nextStep, 1, { ...nextStepObjInConversations, loading: true });
-    this.conversations = updatedConversations;
-    this.currentStep = nextStep;
-    this.currentStepObj = { ...nextStepObjInConversations, loading: true };
-    setTimeout(() => {
-      this.updateBotQuestion();
-    }, 1000);
+    this.currentStepObj = Object.assign(nextStepObjInConversations, updateObj);
+    if (this.currentStepObj.user === 'bot') {
+      setTimeout(() => {
+        this.updateBotQuestion();
+      }, 1000);
+    } else {
+      this.updateStep('bot', 1);
+    }
   }
 
   updateBotQuestion() {
     const nextStep = this.currentStep;
     const nextStepObjInConversations = this.getStepObj(nextStep);
     const updatedConversations = this.conversations.splice(0);
-    updatedConversations.splice(nextStep, 1, { ...nextStepObjInConversations, loading: false });
+    updatedConversations.splice(nextStep, 1, { ...nextStepObjInConversations, loading: false, responseType: nextStepObjInConversations.component });
     this.conversations = updatedConversations;
     this.currentStep = nextStep;
-    this.currentStepObj = { ...nextStepObjInConversations, loading: false };
+    this.currentStepObj = { ...nextStepObjInConversations, loading: false, responseType: nextStepObjInConversations.component };
     const checkIfNextIsBot = this.getStepObj(nextStep + 1);
     this.inputVal = '';
     if (checkIfNextIsBot.user === 'bot') {
-      this.updateBotStep(1);
+      this.updateStep('bot', 1);
     }
   }
 }
