@@ -1,12 +1,12 @@
 import { Component, OnInit,  ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { AnimationOptions } from "ngx-lottie";
+
 @Component({
   selector: 'app-onboarded',
-  templateUrl: './onboarded.page.html',
-  styleUrls: ['./onboarded.page.scss'],
+  templateUrl: './onboarded.component.html',
+  styleUrls: ['./onboarded.component.scss'],
 })
-export class OnboardedPage implements OnInit {
-
+export class OnboardedComponent implements OnInit {
 
   ngState: boolean
   constructor(private changeRef: ChangeDetectorRef) {

@@ -10,10 +10,6 @@ const routes: Routes = [
     path: '',
     redirectTo: 'botscreen',
     pathMatch: 'full'
-  },
-  {
-    path: 'onboarded',
-    loadChildren: () => import('./onboarded/onboarded.module').then( m => m.OnboardedPageModule)
   }
 ];
 

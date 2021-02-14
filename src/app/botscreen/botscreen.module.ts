@@ -9,6 +9,7 @@ import { BotscreenPageRoutingModule } from './botscreen-routing.module';
 import { BotscreenPage } from './botscreen.page';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { ComponentsModule } from '../components/components.module';
 
 export function playerFactory() {
   return player;
@@ -20,6 +21,7 @@ export function playerFactory() {
     FormsModule,
     IonicModule,
     BotscreenPageRoutingModule,
+    ComponentsModule,
     LottieModule.forRoot({ player: playerFactory })
   ],
   declarations: [BotscreenPage]

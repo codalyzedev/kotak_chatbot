@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OnboardedComponent } from './onboarded/onboarded.component';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { OnboardedPageRoutingModule } from './onboarded-routing.module';
 
-import { OnboardedPage } from './onboarded.page';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 
@@ -15,13 +14,13 @@ export function playerFactory() {
 }
 
 @NgModule({
+  declarations: [OnboardedComponent],
+  exports: [OnboardedComponent],
   imports: [
     CommonModule,
-    FormsModule,
     IonicModule,
-    OnboardedPageRoutingModule,
+    FormsModule,
     LottieModule.forRoot({ player: playerFactory })
-  ],
-  declarations: [OnboardedPage]
+  ]
 })
-export class OnboardedPageModule {}
+export class ComponentsModule { }
