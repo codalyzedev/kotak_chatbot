@@ -1,12 +1,58 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { conversations } from '../../mock';
 import { AnimationOptions } from 'ngx-lottie';
-import { IonContent } from '@ionic/angular';
+import { IonContent, ToastController } from '@ionic/angular';
+import { trigger, style, animate, transition, group, query, animateChild } from '@angular/animations';
+import { AnimationController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-botscreen',
   templateUrl: './botscreen.page.html',
   styleUrls: ['./botscreen.page.scss'],
+  animations: [
+    trigger('text-input-container', [
+      transition(':enter', [
+          style({ 'max-height': "0px"}),
+          group([
+            animate('900ms ease-in', style({ 'max-height': "300px"}))
+          ])
+
+      ]),
+      transition(':leave', [
+          group([
+            animate('600ms ease-out', style({ 'max-height': "0px"}))
+          ])
+      ])
+    ]),
+    trigger('textbox', [
+      transition(':enter', [
+          style({ opacity: '0','max-height': "0px"}),
+          group([
+            animate('900ms ease-in-out', style({opacity: '1', 'max-height': "200px"}))
+          ])
+
+      ]),
+      transition(':leave', [
+          group([
+            animate('600ms ease-out', style({opacity: '0','max-height': "0px"}))
+          ])
+      ])
+    ]),
+    trigger('onboarded-container', [
+      transition(':enter', [
+          style({ 'max-height': "0px"}),
+          group([
+            animate('400ms ease-in-out', style({ 'max-height': "100%"}))
+          ])
+
+      ]),
+      transition(':leave', [
+          group([
+            animate('400ms ease-out', style({ 'max-height': "0px"}))
+          ])
+      ])
+    ]),
+  ]
 })
 
 export class BotscreenPage implements OnInit {
@@ -18,7 +64,7 @@ export class BotscreenPage implements OnInit {
   ddOpts: any[];
   @ViewChild('list') list : IonContent;
 
-  constructor() {
+  constructor(private animationCtrl: AnimationController, platform: Platform) {
     this.conversations = [];
     this.currentStep = 0;
     this.currentStepObj = conversations.find(item => item.step === this.currentStep);
@@ -41,12 +87,14 @@ export class BotscreenPage implements OnInit {
   }
 
   onSubmitBtn() {
-    this.updateStep('user', 1);
+
+      this.updateStep('user', 1);
+
   }
 
   onSubmitOpt(value) {
-    this.inputVal = value;
-    this.updateStep('user', 1);
+      this.inputVal = value;
+      this.updateStep('user', 1);
   }
 
   editUserResponse(step) {

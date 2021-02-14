@@ -25,17 +25,19 @@
             <div class="loading" *ngIf="!!currentStepObj.loading && conversation.step === currentStep">
               <ng-lottie [options]="loadingAnim" height="32px" width="80px"> </ng-lottie>
             </div>
-            <div class="text-box">
+            <div class="text-box" @textbox>
               <span
                 *ngIf="conversation.step !== currentStep || (!currentStepObj.loading && conversation.step === currentStep)"
-                class="sf-pro label">
+                class="sf-pro label"
+                @textbox
+                >
                 {{conversation.message}}
               </span>
             </div>
           </div>
           <div *ngIf="conversation.user === 'user'" class="user-item-container">
-            <div class="text-box">
-              <span class="sf-pro label">
+            <div class="text-box" @textbox>
+              <span class="sf-pro label" @textbox>
                 {{conversation.message}}
               </span>
             </div>
@@ -44,29 +46,47 @@
         </div>
       </ion-list>
     </ion-content>
-    <div *ngIf="currentStepObj.responseType === 'text'" class="text-input-container">
-      <div class="input-box">
-        <ion-label position="stacked" class="sf-pro bold label">Name</ion-label>
-        <ion-input class="input" (change)="onChangeInput($event)" value={{inputVal}}></ion-input>
+    <div class='text-input-container'
+    *ngIf="currentStepObj.responseType === 'text' || currentStepObj.responseType === 'number'"
+    @text-input-container>
+      <div *ngIf="currentStepObj.responseType === 'text'" class="input-container-item"
+      @text-input-container
+      >
+        <div class="input-box">
+          <ion-label position="stacked" class="sf-pro bold label">Name</ion-label>
+          <ion-input class="input" (change)="onChangeInput($event)" value={{inputVal}}></ion-input>
+        </div>
+        <ion-button class="submit-button" (click)="onSubmitBtn($event)" @submit-button>
+          <ion-icon slot="icon-only" src="/assets/Send.svg"></ion-icon>
+        </ion-button>
       </div>
-      <ion-button (click)="onSubmitBtn($event)">
-        <ion-icon slot="icon-only" src="/assets/Send.svg"></ion-icon>
-      </ion-button>
+      <div *ngIf="currentStepObj.responseType === 'number'" class="input-container-item"
+      @text-input-container
+      >
+        <ion-range (ionChange)="onChangeInput($event)" value={{inputVal}} dualKnobs="false" min="10" max="100" step="1"
+          snaps="false" pin="true"></ion-range>
+        <ion-button class="submit-button" (click)="onSubmitBtn($event)" @submit-button>
+          <ion-icon slot="icon-only" src="/assets/Send.svg"></ion-icon>
+        </ion-button>
+      </div>
     </div>
-    <div *ngIf="currentStepObj.responseType === 'number'" class="text-input-container">
-      <ion-range (ionChange)="onChangeInput($event)" value={{inputVal}} dualKnobs="false" min="10" max="100" step="1"
-        snaps="false" pin="true"></ion-range>
-      <ion-button (click)="onSubmitBtn($event)">
-        <ion-icon slot="icon-only" src="/assets/Send.svg"></ion-icon>
-      </ion-button>
-    </div>
-    <div *ngIf="currentStepObj.responseType === 'dropdown'" class="dd-input-container">
+
+    <div class='dropdown-input-container'
+    *ngIf="currentStepObj.responseType === 'dropdown'"
+    @text-input-container>
+    <div class="dd-input-container">
       <div *ngFor="let opt of ddOpts">
         <div (click)="onSubmitOpt(opt)" class="btn">
           {{opt}}
         </div>
       </div>
     </div>
-    <app-onboarded *ngIf="currentStepObj.responseType === 'complete'" class="onboarded"></app-onboarded>
   </div>
+
+      <div class='onboarded-container'
+      *ngIf="currentStepObj.responseType === 'complete'"
+      @onboarded-container>
+       </div>
+      <app-onboarded *ngIf="currentStepObj.responseType === 'complete'" class="onboarded"></app-onboarded>
+    </div>
 </ion-content>
