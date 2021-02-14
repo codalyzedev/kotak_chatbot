@@ -74,3 +74,22 @@
     }
   }
 }
+
+ion-range {
+  --bar-height: 8px;
+  --bar-border-radius: 8px;
+  --knob-size: 38px;
+  --knob-background: #fff;
+  --pin-background: #fff;
+  --pin-color: #5B61B9;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+ion-button {
+  --border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  margin-right: 20px;
+}

@@ -46,11 +46,14 @@
         <ion-input class="input" (change)="onChangeInput($event)" value={{inputVal}}></ion-input>
       </div>
       <ion-button (click)="onSubmitBtn($event)">
-        <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+        <ion-icon slot="icon-only" src="/assets/Send.svg"></ion-icon>
       </ion-button>
     </div>
     <div *ngIf="currentStepObj.responseType === 'number'" class="text-input-container">
-      numberrrr
+      <ion-range (ionChange)="onChangeInput($event)" value={{inputVal}} dualKnobs="false" min="10" max="100" step="1" snaps="false" pin="true" ></ion-range>
+      <ion-button (click)="onSubmitBtn($event)">
+        <ion-icon slot="icon-only" src="/assets/Send.svg"></ion-icon>
+      </ion-button>
     </div>
     <div *ngIf="currentStepObj.responseType === 'dropdown'" class="text-input-container">
       numberrrr

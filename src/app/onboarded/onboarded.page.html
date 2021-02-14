@@ -1,9 +1,52 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>onboarded</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
+<ion-content id="content">
 
+
+  <div id="animation1">
+    <ng-lottie
+    [options]="options"
+    (complete)="complete($event)"
+    (destroy)="destroy($event)"
+    (error)="error($event)"
+    (loopComplete)="loop($event)"
+    height="400px"
+    width="300px"
+    > </ng-lottie>
+  </div>
+  <div id="animation3">
+
+    <ng-lottie
+    [options]="wttp"
+    (complete)="complete2($event)"
+    (destroy)="destroy2($event)"
+    (error)="error2($event)"
+    (loopComplete)="loop2($event)"
+
+    width="100px"
+    > </ng-lottie>
+  </div>
+
+  <div id="animation2">
+
+    <ng-lottie
+      [options]="confetti"
+      (complete)="complete2($event)"
+      (destroy)="destroy2($event)"
+      (error)="error2($event)"
+      (loopComplete)="loop2($event)"
+      > </ng-lottie>
+  </div>
+
+  <!-- <div id="animation3">
+
+    <ng-lottie
+    [options]="wttp"
+    (complete)="complete2($event)"
+    (destroy)="destroy2($event)"
+    (error)="error2($event)"
+    (loopComplete)="loop2($event)"
+
+    width="100px"
+    > </ng-lottie>
+  </div> -->
 </ion-content>
