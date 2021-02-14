@@ -64,6 +64,6 @@ export const conversations = [
         message: `Thanks! That's all i need`,
         path: '/assets/bella-profile.png',
         component: 'complete',
-        responseType: 'complete'
+        responseType: 'none'
     }
 ];
