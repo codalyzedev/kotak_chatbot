@@ -18,10 +18,20 @@
   <div id="container">
     <ion-list>
       <div *ngFor="let conversation of conversations">
-        <div class="bot-item-container">
+        <div *ngIf="conversation.user === 'bot'" class="bot-item-container">
           <ion-avatar class="avatar">
             <img src="../../assets/bella-profile.png">
           </ion-avatar>
+          <div class="text-box">
+            <div *ngIf="!!currentStepObj.loading && conversation.step === currentStep">
+              loading
+            </div>
+            <span *ngIf="conversation.step !== currentStep || (!currentStepObj.loading && conversation.step === currentStep)" class="sf-pro label">
+              {{conversation.message}}
+            </span>
+          </div>
+        </div>
+        <div *ngIf="conversation.user === 'user'" class="user-item-container">
           <div class="text-box">
             <span class="sf-pro label">
               {{conversation.message}}
@@ -30,5 +40,17 @@
         </div>
       </div>
     </ion-list>
+    <div *ngIf="currentStepObj.responseType === 'text'" class="text-input-container">
+      <div class="input-box">
+        <ion-label position="stacked" class="sf-pro bold label">Name</ion-label>
+        <ion-input class="input" (change)="onChangeInput($event)" value={{inputVal}}></ion-input>
+      </div>
+      <ion-button (click)="onSubmitBtn($event)">
+        <ion-icon slot="icon-only" name="send-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <div *ngIf="currentStepObj.responseType === 'number'" class="text-input-container">
+      numberrrr
+    </div>
   </div>
 </ion-content>
