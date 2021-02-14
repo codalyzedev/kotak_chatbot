@@ -14,9 +14,6 @@
       </ion-title>
     </ion-toolbar>
   </ion-header>
-<app-onboarded>
-
-</app-onboarded>
   <div id="container">
     <ion-list class="list">
       <div *ngFor="let conversation of conversations">
@@ -67,5 +64,6 @@
         </div>
       </div>
     </div>
+    <app-onboarded *ngIf="currentStepObj.responseType === 'complete'" class="onboarded"></app-onboarded>
   </div>
 </ion-content>

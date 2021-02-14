@@ -100,6 +100,14 @@
   }
 }
 
+.onboarded {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+}
+
 ion-range {
   --bar-height: 8px;
   --bar-border-radius: 8px;
